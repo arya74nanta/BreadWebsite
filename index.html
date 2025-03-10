@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The World of Bread</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff8dc;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .tabs button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            background-color: #f4a460;
+            color: white;
+            border-radius: 5px;
+        }
+        .tabs button.active {
+            background-color: #d2691e;
+        }
+        .content {
+            display: none;
+            margin-top: 20px;
+        }
+        .content.active {
+            display: block;
+        }
+        .search {
+            margin-bottom: 20px;
+        }
+        .bread-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            background: #fff3e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>The World of Bread</h1>
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'history')">History</button>
+            <button class="tab-button" onclick="openTab(event, 'types')">Types</button>
+        </div>
+        <div id="history" class="content active">
+            <p>Bread has been a staple food for thousands of years, dating back to ancient civilizations like Egypt and Mesopotamia. It evolved from simple flatbreads to the diverse varieties we see today, influenced by different cultures and baking techniques.</p>
+        </div>
+        <div id="types" class="content">
+            <input type="text" class="search" id="searchBar" onkeyup="searchBread()" placeholder="Search for a bread type...">
+            <div id="breadList">
+                <div class="bread-card" data-name="sourdough">
+                    <h3>Sourdough</h3>
+                    <p><i>Origin: Ancient Egypt</i></p>
+                    <p>A naturally leavened bread with a tangy flavor.</p>
+                </div>
+                <div class="bread-card" data-name="baguette">
+                    <h3>Baguette</h3>
+                    <p><i>Origin: France</i></p>
+                    <p>A long, thin loaf with a crispy crust and soft interior.</p>
+                </div>
+                <div class="bread-card" data-name="rye bread">
+                    <h3>Rye Bread</h3>
+                    <p><i>Origin: Germany</i></p>
+                    <p>Made with rye flour, often denser with a rich, earthy taste.</p>
+                </div>
+                <div class="bread-card" data-name="whole wheat">
+                    <h3>Whole Wheat</h3>
+                    <p><i>Origin: Worldwide</i></p>
+                    <p>A healthier option made from whole wheat grains.</p>
+                </div>
+                <div class="bread-card" data-name="brioche">
+                    <h3>Brioche</h3>
+                    <p><i>Origin: France</i></p>
+                    <p>A soft, buttery bread often used in desserts and pastries.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openTab(event, tabName) {
+            let contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            
+            let buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+        
+        function searchBread() {
+            let input = document.getElementById('searchBar').value.toLowerCase();
+            let breads = document.querySelectorAll('.bread-card');
+            breads.forEach(bread => {
+                let name = bread.getAttribute('data-name');
+                if (name.includes(input)) {
+                    bread.style.display = 'block';
+                } else {
+                    bread.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
